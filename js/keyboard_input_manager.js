@@ -73,6 +73,10 @@ KeyboardInputManager.prototype.listen = function () {
   this.bindButtonPress(".restart-button", this.restart);
   this.bindButtonPress(".keep-playing-button", this.keepPlaying);
 
+  //AJOUTS LOIC
+  this.bindButtonPress(".save-button", this.save);
+  this.bindButtonPress(".respawn-button",this.respawn);
+
   // Respond to swipe events
   var touchStartClientX, touchStartClientY;
   var gameContainer = document.getElementsByClassName("game-container")[0];
@@ -141,4 +145,15 @@ KeyboardInputManager.prototype.bindButtonPress = function (selector, fn) {
   var button = document.querySelector(selector);
   button.addEventListener("click", fn.bind(this));
   button.addEventListener(this.eventTouchend, fn.bind(this));
+};
+
+//AJOUTS LOIC
+KeyboardInputManager.prototype.save = function (event) {
+  event.preventDefault();
+  this.emit("save");
+};
+
+KeyboardInputManager.prototype.respawn = function (event) {
+  event.preventDefault();
+  this.emit("respawn");
 };
