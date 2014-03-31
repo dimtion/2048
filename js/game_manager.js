@@ -10,6 +10,10 @@ function GameManager(size, InputManager, Actuator, StorageManager) {
   this.inputManager.on("restart", this.restart.bind(this));
   this.inputManager.on("keepPlaying", this.keepPlaying.bind(this));
 
+  //AJOUT LOIC
+  this.inputManager.on("save", this.save.bind(this));
+  this.inputManager.on("respawn", this.respawn.bind(this));
+  this.jeu="";
   this.setup();
 }
 
@@ -33,6 +37,16 @@ GameManager.prototype.isGameTerminated = function () {
   } else {
     return false;
   }
+};
+
+//AJOUT LOIC
+GameManager.prototype.save = function () {
+  this.jeu=this.serialize();
+};
+
+GameManager.prototype.respawn = function () {
+  this.storageManager.setGameState(this.jeu);
+  this.setup();
 };
 
 // Set up the game
